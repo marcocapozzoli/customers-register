@@ -59,6 +59,12 @@ class CustomAuthenticationForm(AuthenticationForm):
         strip=False,
         widget=forms.PasswordInput(attrs={'placeholder': 'Senha'}),
     )
+    error_messages = {
+        'invalid_login': 
+            "Usuário ou senha incorretos."
+        ,
+        'inactive': "Esta conta está inativa.",
+    }
 
     
 # ResetPassword Form
