@@ -1,0 +1,46 @@
+body {
+  background-color: #fafafa;
+}
+
+main {
+  min-height: 100vh;
+  position: relative;
+}
+
+.question {
+  margin: 0;
+  color: #627d98;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.33;
+  -webkit-letter-spacing: 0.5px;
+  -moz-letter-spacing: 0.5px;
+  -ms-letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+  
+.shadow {
+  box-shadow: 0 10px 24px 0 #33333333;
+  border: 0px
+}
+
+.form-centralized {
+  margin-top: 10px;
+  /* position: absolute; */
+  /* top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%); */
+}
+
+.forgot-password {
+  text-align: right;
+  position: relative;
+  font-size: 13px;
+}
+
+.image-logo, img {
+  margin:30px auto;
+  width:100px;
+  height:100px;
+}
