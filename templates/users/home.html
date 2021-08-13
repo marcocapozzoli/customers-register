@@ -1,13 +1,12 @@
-{% extends "users/base_auth.html" %}
-
-{% load crispy_forms_tags %}
-
+{% extends "users/base.html" %}
 
 {% block title %}Home{% endblock %}
 
+
+{% block pagetitle %}Home{%endblock%}
+
 {% block content %}
-
-<h1>Página Inicial</h1>
-<a href="{% url 'logout' %}">Sair</a>
-
+<div class="container">
+    Conteúdo da página
+</div>
 {% endblock %}
