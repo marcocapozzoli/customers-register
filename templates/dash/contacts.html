@@ -7,49 +7,46 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <form action="{% url 'contacts' %}" method="post">
-                {% csrf_token %}
-                <div class="mt-2">{{ form.first_name | as_crispy_field }}</div>
-                <div class="mt-2">{{ form.last_name | as_crispy_field }}</div>
-                <div class="mt-2">{{ form.email | as_crispy_field }}</div>
-                <div class="mt-2">{{ form.birthday | as_crispy_field }}</div>
-                <div class="mt-2">{{ form.phone | as_crispy_field }}</div>
-                <div class="mt-2">{{ form.company | as_crispy_field }}</div>
-                <div class="mt-2">{{ form.label | as_crispy_field }}</div>
-                <button type="submit" class="btn btn-success mt-2" style="text-align: right;">Salvar</button>
-            </form>    
-        </div>
-        <div class="col-md-9">
-            <div class="table-responsive">
-                <table class="table">
-                        <thead>
-                            <tr>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">Empresa</th>
-                            <th scope="col">Detail</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for person in persons %}
-                            <tr>
-                                <td><a href="{% url 'contacts_detail' pk=person.id %}">{{ person.first_name }}</a></td>
-                                <td>{{ person.label }}</td>
-                                <td>{{ person.email }}</td>
-                                <td>{{ person.phone }}</td>
-                                <td>{{ person.company_id }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                </table>
-            </div>
-        </div>
-    </div>   
+<div class="row">
+<div class="col-md-3">
+    <form action="{% url 'contacts' %}" method="post">
+        {% csrf_token %}
+        <div class="mt-2">{{ form.first_name | as_crispy_field }}</div>
+        <div class="mt-2">{{ form.last_name | as_crispy_field }}</div>
+        <div class="mt-2">{{ form.email | as_crispy_field }}</div>
+        <div class="mt-2">{{ form.birthday | as_crispy_field }}</div>
+        <div class="mt-2">{{ form.phone | as_crispy_field }}</div>
+        <div class="mt-2">{{ form.company | as_crispy_field }}</div>
+        <div class="mt-2">{{ form.label | as_crispy_field }}</div>
+        <button type="submit" class="btn btn-success mt-2" style="text-align: right;">Salvar</button>
+    </form>    
+</div>
+<div class="col-md-9">
+    <div class="table-responsive">
+        <table class="table mt-2">
+                <thead>
+                    <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Empresa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for person in persons %}
+                    <tr>
+                        <td><a href="{% url 'contacts_detail' pk=person.id %}">{{ person.first_name }}</a></td>
+                        <td>{{ person.label }}</td>
+                        <td>{{ person.email }}</td>
+                        <td>{{ person.phone }}</td>
+                        <td>{{ person.company_id }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+    </div>
+</div>
 </div>
 
 

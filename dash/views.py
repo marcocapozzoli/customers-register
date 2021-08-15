@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.contrib import messages
 
-from dash.forms import PersonForm
+
+from dash.forms import PersonForm, PersonDetailForm
 from dash.models import Person
 
 
@@ -51,8 +51,10 @@ def contacts(request):
 
 def contacts_detail(request, pk):
     detail = Person.objects.get(pk=pk)
+    form = PersonDetailForm()
     return render(request, 'dash/contacts_detail.html',{
         'detail':detail,
+        'form': form
     })
 
 

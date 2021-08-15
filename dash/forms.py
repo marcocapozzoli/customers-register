@@ -1,6 +1,6 @@
+from dash.models import Person
 from django import forms
 from django.contrib.admin.widgets import AdminDateWidget
-from django.core import validators
 
 from .validators import *
 
@@ -49,3 +49,6 @@ class PersonForm(forms.Form):
         label='',
         choices=LABEL,
     )
+
+class PersonDetailForm(PersonForm):
+    note = forms.CharField(max_length=60)

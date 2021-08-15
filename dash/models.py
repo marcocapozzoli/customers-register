@@ -16,6 +16,10 @@ class Person(models.Model):
     phone = models.CharField(max_length=25, blank=False, null=False)
     company_id = models.CharField(max_length=15, blank=False, null=False)
     label = models.CharField(max_length=6, choices=LABEL, blank=False, null=False, default='Frio')
+    # note = models.TextField(default='')
+    # foto = models.FileField(default=None)
+    # social_media = models.URLField(default=None)
+    
     update_date = models.DateTimeField(auto_now=True)
     created_date = models.DateTimeField(auto_now_add=True)
     

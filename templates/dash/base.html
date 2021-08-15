@@ -19,7 +19,7 @@
 </head>
 <body>
         
-    <main>
+    <main style="background-color: #F7F7F7;">
 
         <!-- Sidebar Start -->
         <div class="leftside-menu menuitem-active">
@@ -172,14 +172,19 @@
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box">
-                                <h4 class="page-title">{% block pagetitle %}{%endblock%}</h4>
+                            <div class="page-title-box"
+                            style="
+                            background-color: #fff;
+                            border: 1px solid #e5e5e5;
+                            margin: 3px -25px 0px -25px;">
+                                <h4 class="page-title" style="padding-left: 25px;">{% block pagetitle %}{%endblock%}</h4>
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
-
+                    
                     {% block content %}{% endblock %}
+                    
 
                 </div>
                 <!-- End Content -->
