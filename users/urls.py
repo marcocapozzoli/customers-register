@@ -11,7 +11,7 @@ urlpatterns = [
     path('password-reset-complete/', views.CustomPasswordResetCompleteView.as_view(), name='password_reset_complete'),
     
     
-    path('', views.home, name='home'),
+    path('', views.dash, name='dash'),
     path('login', views.CustomLoginView.as_view(), name='login'),
     path('signup', views.SignupView.as_view(), name='signup'),
     path('logout', views.CustomLogoutView.as_view(), name='logout'),

@@ -7,9 +7,9 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, 
 from .forms import CustomPasswordResetForm, SignupForm, CustomAuthenticationForm, CustomSetPasswordForm
 
 
-def home(request):
+def dash(request):
     if request.user.is_authenticated:
-        return render(request, "users/home.html")
+        return render(request, "dash/home.html")
     else:
         return HttpResponseRedirect(reverse('login'))
 
