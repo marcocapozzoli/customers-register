@@ -32,12 +32,13 @@
                             <th scope="col">Email</th>
                             <th scope="col">Telefone</th>
                             <th scope="col">Empresa</th>
+                            <th scope="col">Detail</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for person in persons %}
                             <tr>
-                                <td><a href="/">{{ person.first_name }}</a></td>
+                                <td><a href="{% url 'contacts_detail' pk=person.id %}">{{ person.first_name }}</a></td>
                                 <td>{{ person.label }}</td>
                                 <td>{{ person.email }}</td>
                                 <td>{{ person.phone }}</td>
@@ -51,6 +52,30 @@
     </div>   
 </div>
 
+
 <!-- Modal para detalhes do cliente -->
+<div class="modal fade" id="clientDetailModal" tabindex="-1" aria-labelledby="clientDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+		<div class="modal-content">
+			<form method="POST" action="{% url 'contacts' %}"></form>
+				<div class="modal-header">
+					<h5 class="modal-title" id="clientDetailModalLabel"></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						{% csrf_token %}
+						{{ form | crispy }}   
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</div>
+			</form>
+		</div>
+    </div>
+</div>
+
 
 {% endblock %}

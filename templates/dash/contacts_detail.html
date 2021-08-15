@@ -1,0 +1,21 @@
+{% extends "dash/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Contatos{% endblock %}
+
+{% block pagetitle %}Configuração de {{detail.first_name}}{%endblock%}
+
+{% block content %}
+
+<div class="container">
+    {{ detail.first_name}}<br>
+    {{ detail.last_name}}<br>
+    {{ detail.email}}<br>
+    {{ detail.birthday}}<br>
+    {{ detail.phone}}<br>
+    {{ detail.company_id}}<br>
+    {{ detail.label}}
+</div>
+
+
+{% endblock %}

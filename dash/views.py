@@ -49,4 +49,10 @@ def contacts(request):
     else:
         return HttpResponseRedirect(reverse('login'))
 
+def contacts_detail(request, pk):
+    detail = Person.objects.get(pk=pk)
+    return render(request, 'dash/contacts_detail.html',{
+        'detail':detail,
+    })
+
 
