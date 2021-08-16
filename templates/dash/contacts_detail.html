@@ -3,34 +3,113 @@
 
 {% block title %}Contatos{% endblock %}
 
-{% block pagetitle %}Configuração de {{detail.first_name}}{%endblock%}
+{% block pagetitle %}
+    
+    {% if not detail.photo %}
+        <img src="/media/logo.png" style="height: 60px; width: 60px;" alt="client-image" class="rounded-circle">    
+    {% else %}
+        <img src="/media/{{detail.photo}}" style="height: 60px; width: 60px;" alt="client-image" class="rounded-circle">
+    {% endif %}
+    - {{detail.first_name}}
+
+{%endblock%}
+
+
 
 {% block content %}
 
 <div class="row mt-2">
-<div class="col-md-4">
-    <div class="card">
-        <div class="card-header">
-            <span style="font-size: 13px; margin-top: 2px; color: #721ea9; font-weight: 600;">DETALHES</span>
+
+    <!-- Detalhes -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <span style="font-size: 13px; margin-top: 2px; color: #721ea9; font-weight: 600;">DETALHES</span>
+                <button id="editClientButton" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detailClientModal">Editar</button>
+            </div>
+            <div class="card-body" id="detailData">
+                <div>
+                    <strong>Nome: </strong>
+                    <span id="detailFirstName">{{ detail.first_name }}</span>
+                </div>
+                {% if detail.last_name %}
+                    <div>
+                        <strong>Sobrenome: </strong>
+                        <span id="detailLastName">{{ detail.last_name }}</span>
+                    </div>
+                {% endif %} 
+                <div>
+                    <strong>Email: </strong>
+                    <span id="detailEmail">{{ detail.email }}</span>
+                </div>
+                {% if detail.birthday %}
+                <div>
+                    <strong>Aniersário: </strong>
+                    <span id="detailBirthday">{{ detail.birthday }}</span>
+                </div>
+                {% endif %}
+                <div>
+                    <strong>Telefone: </strong>
+                    <span id="detailPhone">{{ detail.phone }}</span>
+                </div>
+                <div>
+                    <strong>Empresa: </strong>
+                    <span id="detailCompanyId">{{ detail.company_id }}</span>
+                </div>
+                <div>
+                    <strong>Tipo: </strong>
+                    <span id="detailLabel">{{ detail.label }}</span>
+                </div>
+                {% if detail.social_media %}
+                    <div>
+                        <strong>Redes Sociais: </strong>
+                        <span id="detailSocialMedia">{{ detail.social_media }}</span>
+                    </div>
+                {% endif %}    
+            </div>
         </div>
-        <div class="card-body">
-            <div class="mt-2"><strong>Nome: </strong>{{ detail.first_name }}</div>
-            <div class="mt-2"><strong>Sobrenome: </strong>{{ detail.last_name }}</div>
-            <div class="mt-2"><strong>E-mail: </strong>{{ detail.email }}</div>
-            <div class="mt-2"><strong>Aniversário: </strong>{{ detail.birthday }}</div>
-            <div class="mt-2"><strong>Telefone: </strong>{{ detail.phone }}</div>
-            <div class="mt-2"><strong>Empresa: </strong>{{ detail.company_id }}</div>
-            <div class="mt-2"><strong>Tipo: </strong>{{ detail.label }}</div>    
+    </div>
+
+    <!-- Atividades, histórico, negócios -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                Atividades, historico, negócios
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <!-- Observações -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <span style="font-size: 13px; margin-top: 2px; color: #721ea9; font-weight: 600;">OBSERVAÇÕES</span>
+            </div>
+            <div class="card-body">
+                {% if not detail.note %}
+                    <div>Sem observações</div>
+                {% else %}
+                    <div>{{ detail.note }}</div>  
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
-<div class="col-md-8">
-    <div class="card">
-        <div class="card-body">
-            Atividades, historico, negócios
+<!-- 
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <span style="font-size: 13px; margin-top: 2px; color: #721ea9; font-weight: 600;">OBSERVAÇÕES</span>
+            </div>
+            <div class="">
+                <textarea name="" id="" cols="43" rows="5"></textarea>  
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <div class="row">
@@ -44,7 +123,62 @@
             </div>
         </div>
     </div>
+</div> -->
+
+
+
+
+<!-- Modal para editar dados do cliente -->
+<div class="modal fade" id="detailClientModal" tabindex="-1" aria-labelledby="detailClientModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="detailClientModalLabel"></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+            <form method="POST" action="{% url 'contacts' %}"></form>
+				<div class="modal-body">
+					<div class="mb-3">
+                        {% csrf_token %}
+                        <div id="formFirstName" class="mt-2">nv{{ form.first_name | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.last_name | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.email | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.birthday | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.phone | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.company | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.label | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.social_media | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.photo | as_crispy_field }}</div>
+                      
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</div>
+			</form>
+		</div>
+    </div>
 </div>
+
+<script>
+    const botao = document.querySelector('#editClientButton');
+    botao.addEventListener('click', ()=> {
+        
+        const firstName = document.querySelector('#detailFirstName');
+        const lastName = document.querySelector('#detailLastName');
+        const email = document.querySelector('#detailEmail');
+        const birthday = document.querySelector('#detailBirthday');
+        const phone = document.querySelector('#detailPhone');
+        const company = document.querySelector('#detailCompanyId');
+        const label = document.querySelector('#detailLabel');
+        const socialmedia = document.querySelector('#detailSocialMedia');
+
+        const outro = document.querySelector('#formFirstName');
+        
+        outro.value = 'Marco';
+    })  
+</script>
 
 {% endblock %}
 

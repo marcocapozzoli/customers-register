@@ -19,24 +19,13 @@ class PersonForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': 'Nome'}),
         max_length=15
     )
-    last_name = forms.CharField(
-        label='',
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Sobrenome'}),
-        max_length=15
-    )
     email = forms.EmailField(
         label='',
         widget=forms.TextInput(attrs={'placeholder': 'Email'}),
-    )
-    birthday = forms.DateField(
-        label='',
-        #widget=forms.DateInput(attrs={'type':'date'})
-        widget=AdminDateWidget(attrs={'placeholder': 'Aniversário'})
     ) 
-    phone = forms.CharField(
+    phone = forms.IntegerField(
         label='',
-        max_length=13,
+        # max_length=11,
         validators=[validate_phone],
         widget=forms.TextInput(attrs={'placeholder': 'Telefone: 99 99999-9999'})
     )
@@ -51,4 +40,20 @@ class PersonForm(forms.Form):
     )
 
 class PersonDetailForm(PersonForm):
-    note = forms.CharField(max_length=60)
+    last_name = forms.CharField(
+        label='',
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Sobrenome'}),
+        max_length=15
+    )
+    birthday = forms.DateField(
+        label='',
+        widget=AdminDateWidget(attrs={'placeholder': 'Aniversário'})
+    )
+    note = forms.CharField(
+        label='',
+        max_length=500,
+        widget=forms.Textarea(attrs={'placeholder':'Detalhes'})
+    )
+    photo = forms.FileField()
+    social_media = forms.URLField()

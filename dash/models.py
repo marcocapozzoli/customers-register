@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timezone
 
 class Person(models.Model):
     
@@ -10,15 +10,15 @@ class Person(models.Model):
     )
     
     first_name = models.CharField(max_length=15, blank=False, null=False)
-    last_name = models.CharField(max_length=15, blank=True, null=True)
-    birthday = models.DateField(default=datetime.now)
+    last_name = models.CharField(max_length=15, blank=True, null=True, default='')
+    birthday = models.DateField(null=True)
     email = models.EmailField()
-    phone = models.CharField(max_length=25, blank=False, null=False)
+    phone = models.IntegerField(blank=False, null=False)
     company_id = models.CharField(max_length=15, blank=False, null=False)
     label = models.CharField(max_length=6, choices=LABEL, blank=False, null=False, default='Frio')
-    # note = models.TextField(default='')
-    # foto = models.FileField(default=None)
-    # social_media = models.URLField(default=None)
+    note = models.TextField(default='')
+    photo = models.FileField(null=True)
+    social_media = models.URLField(null=True)
     
     update_date = models.DateTimeField(auto_now=True)
     created_date = models.DateTimeField(auto_now_add=True)

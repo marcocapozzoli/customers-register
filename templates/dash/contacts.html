@@ -8,20 +8,12 @@
 {% block content %}
 
 <div class="row">
-<div class="col-md-3">
-    <form action="{% url 'contacts' %}" method="post">
-        {% csrf_token %}
-        <div class="mt-2">{{ form.first_name | as_crispy_field }}</div>
-        <div class="mt-2">{{ form.last_name | as_crispy_field }}</div>
-        <div class="mt-2">{{ form.email | as_crispy_field }}</div>
-        <div class="mt-2">{{ form.birthday | as_crispy_field }}</div>
-        <div class="mt-2">{{ form.phone | as_crispy_field }}</div>
-        <div class="mt-2">{{ form.company | as_crispy_field }}</div>
-        <div class="mt-2">{{ form.label | as_crispy_field }}</div>
-        <button type="submit" class="btn btn-success mt-2" style="text-align: right;">Salvar</button>
-    </form>    
+<div class="col-md-2">
+    
+    <button type="submit" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#newClientModal">+ Pessoa</button>    
+    <button type="submit" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Empresa</button>    
 </div>
-<div class="col-md-9">
+<div class="col-md-10">
     <div class="table-responsive">
         <table class="table mt-2">
                 <thead>
@@ -50,19 +42,23 @@
 </div>
 
 
-<!-- Modal para detalhes do cliente -->
-<div class="modal fade" id="clientDetailModal" tabindex="-1" aria-labelledby="clientDetailModalLabel" aria-hidden="true">
+<!-- Modal para cadastro de cliente -->
+<div class="modal fade" id="newClientModal" tabindex="-1" aria-labelledby="newClientModalLabel" aria-hidden="true">
     <div class="modal-dialog">
 		<div class="modal-content">
-			<form method="POST" action="{% url 'contacts' %}"></form>
+			<form method="POST" action="{% url 'contacts' %}">
 				<div class="modal-header">
-					<h5 class="modal-title" id="clientDetailModalLabel"></h5>
+					<h5 class="modal-title" id="newClientModalLabel"></h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="mb-3">
-						{% csrf_token %}
-						{{ form | crispy }}   
+                        {% csrf_token %}
+                        <div class="mt-2">{{ form.first_name | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.email | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.phone | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.company | as_crispy_field }}</div>
+                        <div class="mt-2">{{ form.label | as_crispy_field }}</div>
 					</div>
 				</div>
 				<div class="modal-footer">
